@@ -5,23 +5,23 @@ __Required packages:__
 * Eigen3
 * OpenMP
 
-How to compile, after downloading the repository in __<PROJECT_ROOT>__:
+How to compile, after downloading the repository in **<PROJECT_ROOT>**:
 
 ```
-cd <PROJECT_ROOT>
+cd **<PROJECT_ROOT>**
 mkdir build
 cd build
 cmake ..
 make -j9
 ```
 
-A library _libgmm.so_ will be created in __<PROJECT_ROOT>___/lib_
-Several tests will be created in __<PROJECT_ROOT>___/bin_
+A library _libgmm.so_ will be created in **<PROJECT_ROOT>**_/lib_
+Several tests will be created in **<PROJECT_ROOT>**_/bin_
 
-To use the library, simply execute in the __<PROJECT_ROOT>___/build/_ directory:
+To use the library, simply execute in the **<PROJECT_ROOT>**_/build/_ directory:
 
 ```
 make install
 ```
 
-and use the Findgmms.cmake file that is available in the __<PROJECT_ROOT>___/cmake_ directory.
+and use the Findgmms.cmake file that is available in the **<PROJECT_ROOT>**_/cmake_ directory.
