@@ -26,8 +26,8 @@ class GaussianMixtureModel {
     initialized_ = false;
   }
   GaussianMixtureModel(const int num_components,
-		       const double delta = 0.01,
-		       const int num_iterations = 100) {
+                       const double delta = 0.01,
+                       const int num_iterations = 100) {
     num_components_ = num_components;
     prior_vec_.resize(num_components_);
     gaussian_vec_.resize(num_components_);
@@ -74,6 +74,20 @@ class GaussianMixtureModel {
     }
 
     return gaussian_vec_[i];
+  }
+  inline const std::vector<Eigen::VectorXd> gaussianMeans() const {
+    std::vector<Eigen::VectorXd> means(gaussian_vec_.size());
+    for (int g = 0; g < gaussian_vec_.size(); ++g) {
+      means.at(g) = gaussian_vec_.at(g).mean();
+    }
+    return means;
+  }
+  inline const std::vector<Eigen::MatrixXd> gaussianCovariances() const {
+    std::vector<Eigen::MatrixXd> covs(gaussian_vec_.size());
+    for (int g = 0; g < gaussian_vec_.size(); ++g) {
+      covs.at(g) = gaussian_vec_.at(g).covariance();
+    }
+    return covs;
   }
 
  private:

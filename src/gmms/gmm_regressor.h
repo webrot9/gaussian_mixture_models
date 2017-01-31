@@ -8,9 +8,10 @@
 #ifndef _GMM_REGRESSOR_H_
 #define _GMM_REGRESSOR_H_
 
-#include <vector>
-#include <memory>
 #include <Eigen/Core>
+#include <memory>
+#include <string>
+#include <vector>
 
 #include "gaussian_mixture_model.h"
 
@@ -23,22 +24,25 @@ class GMMRegressor {
     trained_ = false;
   }
   GMMRegressor(const double delta,
-		const int max_iterations) {
+               const int max_iterations) {
     delta_ = delta;
     max_iterations_ = max_iterations;
     trained_ = false;
   }
 
   // dataset with each datapoint per row and each dimension per column
-  void train(const Eigen::MatrixXd &dataset, bool evaluate_bic = true, int gmm_components = 10);
+  void train(const Eigen::MatrixXd &dataset,
+             bool evaluate_bic = true, int gmm_components = 10);
   inline Eigen::MatrixXd predict(const Eigen::MatrixXd &dataset) const {
     int diff = input_size_ - dataset.cols();
-    Eigen::VectorXi indices = Eigen::VectorXi::LinSpaced(diff, dataset.cols(), input_size_ - 1);
-    
+    Eigen::VectorXi indices =
+        Eigen::VectorXi::LinSpaced(diff, dataset.cols(), input_size_ - 1);
+
     return predict(dataset, indices);
   }
-  Eigen::MatrixXd predict(const Eigen::MatrixXd &dataset,
-			  const Eigen::VectorXi &output_indices) const;
+  Eigen::MatrixXd predict(
+      const Eigen::MatrixXd &dataset,
+      const Eigen::VectorXi &output_indices) const;
   void load(const std::string filename);
   void save(const std::string filename);
 
@@ -49,7 +53,13 @@ class GMMRegressor {
   inline void setMaxIterations(const int max_iterations) {
     max_iterations_ = max_iterations;
   }
-
+  inline const std::vector<Eigen::VectorXd> gmmMeans() const {
+      return gmm_->gaussianMeans();
+  }
+  inline const std::vector<Eigen::MatrixXd> gmmCovariances() const {
+      return gmm_->gaussianCovariances();
+  }
+  
  private:
   bool trained_;
   double delta_;

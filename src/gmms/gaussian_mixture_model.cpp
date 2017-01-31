@@ -5,11 +5,12 @@
 //#                                                       #//
 //#########################################################//
 
+
+#include <omp.h>
+
 #include <cmath>
 #include <ctime>
 #include <iostream>
-
-#include <omp.h>
 
 #include "gaussian_mixture_model.h"
 
